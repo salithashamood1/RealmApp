@@ -43,11 +43,12 @@ namespace TestRealm.Controllers
 
                 // Create realm app
                 client.DefaultRequestHeaders.Authorization =  new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
                 var appData = new AppData()
                 {
-                    name = "testWeb2",
+                    name = "testWeb3",
                 };
-                //var createEndPoint = new Uri("https://realm.mongodb.com/api/admin/v3.0/groups/6290a85d838a146f2c708939/apps");
+
                 var createEndPoint = new Uri("https://realm.mongodb.com/api/admin/v3.0/groups/6290a85d838a146f2c708939/apps");
                 var newPostJsonCreate = JsonConvert.SerializeObject(appData);
                 var payloadCreate = new StringContent(newPostJsonCreate, Encoding.UTF8, "application/json");
@@ -73,7 +74,9 @@ namespace TestRealm.Controllers
                         {
                             state = "enabled",
                             is_recovery_mode_disabled = false,
-                            database_name = "testDatabase",
+                            client_max_offline_days = 30,
+                            service_name = "mongodb-atlas",
+                            database_name = "testWeb3",
                             permissions = new Permissions()
                             {
                                 rules = new Rules()

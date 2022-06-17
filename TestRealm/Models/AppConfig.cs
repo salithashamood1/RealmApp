@@ -20,6 +20,8 @@
     {
         public string state { get; set; } = string.Empty;
         public bool development_mode_enabled { get; set; } = true;
+        public string service_name { get; set; } = string.Empty;
+        public int client_max_offline_days { get; set; } = 30;
         public bool is_recovery_mode_disabled { get; set; } = false;
         public string database_name { get; set; } = string.Empty;
         public Permissions permissions { get; set; } = new Permissions();
