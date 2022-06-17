@@ -46,7 +46,7 @@ namespace TestRealm.Controllers
                 var appId = appCreate.CreateAppWithName(app.name,client).Result._id;
                 if (appId == null)
                 {
-                    return NotFound($"Realm app not created");
+                    return NotFound("Realm app not created");
                 }
                 appCreate.CreateAppWithServices(appId, client, app.name);
                 appCreate.CreateAppWithAuth(appId, client);
