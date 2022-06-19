@@ -49,6 +49,7 @@ namespace TestRealm.Controllers
                     return NotFound("Realm app not created");
                 }
                 appCreate.CreateAppWithServices(appId, client, app.name);
+                appCreate.EnableDeveloperModeAsync(appId, client);
                 appCreate.CreateAppWithAuth(appId, client);
                 return Ok(appCreate.Get(appId, client).Result);
             }

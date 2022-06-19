@@ -46,7 +46,7 @@ namespace TestRealm.Controllers
 
                 var appData = new AppData()
                 {
-                    name = "testWeb3",
+                    name = "testWeb7",
                 };
 
                 var createEndPoint = new Uri("https://realm.mongodb.com/api/admin/v3.0/groups/6290a85d838a146f2c708939/apps");
@@ -76,7 +76,7 @@ namespace TestRealm.Controllers
                             is_recovery_mode_disabled = false,
                             client_max_offline_days = 30,
                             service_name = "mongodb-atlas",
-                            database_name = "testWeb3",
+                            database_name = "testDatabase",
                             permissions = new Permissions()
                             {
                                 rules = new Rules()
@@ -103,9 +103,9 @@ namespace TestRealm.Controllers
                                 "gender",
                                 "itemNumber",
                                 "mobileNumber",
-                                "name"
+                                "name",
+                                "userName"
                             },
-                            development_mode_enabled = true
                         }
                     }
                 };
@@ -117,6 +117,17 @@ namespace TestRealm.Controllers
                 //var jsonDecodeAppConfig = JsonConvert.DeserializeObject<AppServices>(resultAppConfig);
                 //Console.WriteLine(appConfigEndPoint);
 
+
+                //Enable developer mode
+                var developerModeEnableEndPoint = "https://realm.mongodb.com/api/admin/v3.0/groups/6290a85d838a146f2c708939/apps/" + appId + "/sync/config";
+                var enbleDM = new EnableDeveloperMode()
+                {
+                    development_mode_enabled = true
+                };
+                var newPostJsonEnableDM = JsonConvert.SerializeObject(enbleDM);
+                var payloadEnableDM = new StringContent(newPostJsonEnableDM, Encoding.UTF8, "application/json");
+                var responseEnableDM = client.PutAsync(developerModeEnableEndPoint, payloadEnableDM).Result;
+                var resultEnableDM = responseEnableDM.Content.ReadAsStringAsync().Result;
 
                 // Create app auth
                 var appAuthConfigEndPoint = "https://realm.mongodb.com/api/admin/v3.0/groups/6290a85d838a146f2c708939/apps/"+appId+"/auth_providers";

@@ -154,6 +154,28 @@ namespace TestRealm.Services
             }
         }
 
+        public async Task EnableDeveloperModeAsync(string id, HttpClient client)
+        {
+            try
+            {
+                var EndPoint = new Uri("https://realm.mongodb.com/api/admin/v3.0/groups/6245db2bc2fda50c40791d24/apps/" + id + "/sync/config");
+                var EnableDM = new EnableDeveloperMode()
+                {
+                    development_mode_enabled = true
+                };
+
+                var newPostJson = JsonConvert.SerializeObject(EnableDM);
+                var payload = new StringContent(newPostJson, Encoding.UTF8, "application/json");
+                var result = client.PutAsync(EndPoint, payload).Result.Content.ReadAsStringAsync();
+                Console.WriteLine(result);
+            }
+            catch (Exception)
+            {
+
+                throw new Exception();
+            }
+        }
+
         public async Task<AppServices> Get(string id, HttpClient client)
         {
             try

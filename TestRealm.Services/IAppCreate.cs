@@ -10,5 +10,6 @@ namespace TestRealm.Services
         Task<AppServices> CreateAppWithServices(string id, HttpClient client, string name);
         Task<AppServices> CreateAppWithAuth(string id, HttpClient client);
         Task<string> ConvertToJason(Uri endPoint,  String json, HttpClient client);
+        Task EnableDeveloperModeAsync(string id,  HttpClient client);
     }
 }
